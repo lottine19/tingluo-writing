@@ -1,11 +1,365 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+const articleFiles = Object.values(import.meta.glob('../data/writing/*.json', { eager: true }));
+const articles = articleFiles
+  .map(f => f.default ?? f)
+  .sort((a, b) => b.date.localeCompare(a.date));
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const articlesJSON = JSON.stringify(articles);
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Essays on law, philosophy, systems, and the nature of authority." />
+<title>Ting Luo</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=Viaoda+Libre&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<Layout>
-	<Welcome />
-</Layout>
+<style is:global>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1f2e;
+  --paper: #ffffff;
+  --accent: #1a2744;
+  --accent-pink: #e82389;
+  --muted: #5a6070;
+  --faint: #c8cdd8;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --max-width: 720px;
+  --max-width-wide: 1080px;
+}
+
+html { font-size: 16px; background: var(--paper); color: var(--ink); scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-display); min-height: 100vh; }
+
+a { color: var(--ink); text-decoration-color: var(--faint); text-underline-offset: 3px; transition: color 0.2s; }
+a:hover { color: var(--accent-pink); }
+
+.site-header { padding: var(--space-md) 0; }
+.site-header .container {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-name {
+  font-family: 'UnifrakturMaguntia', serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--accent);
+  cursor: default;
+}
+.site-nav { display: flex; gap: var(--space-md); list-style: none; }
+.site-nav a {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.site-nav a:hover { color: var(--ink); }
+
+.hero { padding: var(--space-xl) 0 var(--space-lg); display: flex; justify-content: center; }
+.hero .container,
+.hero .container--wide {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero__title {
+  font-family: 'Viaoda Libre', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.6rem, 5.8vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  color: var(--ink);
+  text-align: center;
+}
+.hero__title .word-pink { color: var(--accent-pink); }
+
+.section { padding: var(--space-lg) 0; border-top: 1px solid var(--faint); }
+.container--wide { max-width: var(--max-width-wide); margin: 0 auto; padding: 0 var(--space-md); }
+.section__label {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: var(--space-md);
+}
+
+.article-grid { display: grid; gap: 0; }
+.article-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--faint);
+  cursor: pointer;
+  transition: padding-left 0.2s;
+}
+.article-card:hover { padding-left: var(--space-xs); }
+.article-card__left { display: flex; align-items: baseline; gap: var(--space-xs); flex-wrap: wrap; }
+.article-card__title {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.article-card:hover .article-card__title { color: var(--accent); }
+.article-card__meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.article-card__excerpt {
+  grid-column: 1 / -1;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.tag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.tag--law { color: var(--accent); }
+.tag--life { color: #2a7d5f; }
+.tag--philosophy { color: #5b4fa8; }
+.tag--observation { color: #b8860b; }
+.tag--governance { color: #2f80b8; }
+
+.about-text {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink);
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.site-footer { padding: var(--space-md) 0; border-top: 1px solid var(--faint); }
+.site-footer .container { max-width: var(--max-width-wide); margin: 0 auto; padding: 0 var(--space-md); }
+.site-footer__text {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.doc-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  overflow-y: auto;
+}
+.doc-overlay.open { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.doc-inner { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 8rem; }
+.doc-back {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--faint);
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 3rem;
+  margin-right: 0.75rem;
+  display: inline-block;
+  padding: 2px 8px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.doc-back:hover { color: var(--ink); border-color: var(--muted); }
+.doc-category {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+.doc-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+.doc-meta {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 3rem;
+}
+.doc-divider { width: 100%; height: 1px; background: var(--faint); margin: 2rem 0; }
+.doc-body-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: var(--ink);
+}
+.doc-body-text p + p { margin-top: 1.5rem; }
+
+@media (max-width: 640px) {
+  :root { --space-xl: 4rem; --space-lg: 3rem; }
+  .site-header .container { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+  .article-card { grid-template-columns: 1fr; }
+  .article-card__meta { order: -1; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <span class="site-name">Ting Luo</span>
+    <nav aria-label="Main navigation">
+      <ul class="site-nav">
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container--wide">
+      <h1 class="hero__title">Show me your <span class="word-pink">authority.</span></h1>
+    </div>
+  </section>
+
+  <section class="section" id="writing" style="border-top: none;">
+    <div class="container--wide">
+      <p class="section__label">Recent Writing</p>
+      <div class="article-grid">
+        {articles.map((article) => (
+          <div class="article-card" data-article-id={article.slug}>
+            <div class="article-card__left">
+              <span class={`tag tag--${article.category}`}>{article.categoryLabel}</span>
+              <span class="article-card__title">{article.title}</span>
+            </div>
+            <span class="article-card__meta">{article.date}</span>
+            <p class="article-card__excerpt">{article.excerpt}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" style="padding: var(--space-xl) 0;">
+    <div class="container--wide">
+      <p class="section__label" style="text-align: center;">About</p>
+      <p class="about-text">
+        I write about everything that becomes visible when life touches a system: law, institutions, cities, mobility, money, health, language, weather, power, and the strange little errors that reveal how the world is built.
+        <br /><br />
+        Formal research publications and archives are maintained separately at <a href="https://versence.org" target="_blank">Versence Institute</a>.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="site-footer__text">© {new Date().getFullYear()} Ting Luo · All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="doc-overlay" id="doc-overlay">
+  <div class="doc-inner" id="doc-inner"></div>
+</div>
+
+<script is:inline define:vars={{ articlesJSON }}>
+  const ARTICLES = {};
+  JSON.parse(articlesJSON).forEach(a => { ARTICLES[a.slug] = a; });
+
+  const categoryColors = {
+    governance: '#2f80b8',
+    law: '#1a2744',
+    life: '#2a7d5f',
+    philosophy: '#5b4fa8',
+    observation: '#b8860b',
+  };
+
+  function openArticle(slug) {
+    const a = ARTICLES[slug];
+    if (!a) return;
+    const color = categoryColors[a.category] || '#5a6070';
+    const bodyHTML = a.body.map(p => `<p>${p}</p>`).join('');
+    const html = `
+      <button class="doc-back" id="btn-back">← Back</button>
+      <div class="doc-category" style="color:${color};border-color:${color}">${a.categoryLabel}</div>
+      <div class="doc-title">${a.title}</div>
+      <div class="doc-meta">By ${a.author} · ${a.date}</div>
+      <div class="doc-divider"></div>
+      <div class="doc-body-text">${bodyHTML}</div>
+    `;
+    const overlay = document.getElementById('doc-overlay');
+    document.getElementById('doc-inner').innerHTML = html;
+    overlay.classList.add('open');
+    overlay.scrollTop = 0;
+    document.getElementById('btn-back').addEventListener('click', closeArticle);
+  }
+
+  function closeArticle() {
+    document.getElementById('doc-overlay').classList.remove('open');
+  }
+
+  document.querySelectorAll('.article-card').forEach(card => {
+    card.addEventListener('click', () => openArticle(card.dataset.articleId));
+  });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
+</script>
+
+</body>
+</html>
