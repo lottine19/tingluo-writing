@@ -1,0 +1,515 @@
+---
+const siteTitle = 'Ting Luo';
+const pageDescription = 'Essays on law, philosophy, systems, and the nature of authority.';
+
+const articles = [
+  {
+    title: "You Called It a Feature. Then a Bug. Then a Preview. Then Flair.",
+    excerpt: "How xAI's @grok account posted five contradictory explanations in three days — and what it means for every SuperGrok subscriber.",
+    date: "2026-06",
+    category: "law",
+    slug: "xai-contradictions",
+  },
+  {
+    title: "I Challenged the California Secretary of State. They Apologized.",
+    excerpt: "40 years. $5. And an OAL petition that's still not withdrawn.",
+    date: "2026-06",
+    category: "law",
+    slug: "sos-five-dollars",
+  },
+  {
+    title: "If I Can't See It, How Do I Know It's Running?",
+    excerpt: "16 AI agents working in the background — or zero? When a company removes the only way to verify a feature, what exactly are you paying for?",
+    date: "2026-06",
+    category: "observation",
+    slug: "invisible-features",
+  },
+  {
+    title: "What Your City's Ordinance Doesn't Tell You",
+    excerpt: "Montana has no statewide texting ban. But cross into Bozeman, and you owe $100. Where's the sign? Where's the notice? Where's the due process?",
+    date: "2026-06",
+    category: "law",
+    slug: "ordinance-notice",
+  },
+  {
+    title: "I Don't Get Sick",
+    excerpt: "On listening to your body before it has to scream. And why the medical system profits from people who don't.",
+    date: "2026-06",
+    category: "life",
+    slug: "i-dont-get-sick",
+  },
+  {
+    title: "Ignorance of the Law Is No Excuse — But Who Taught You the Law?",
+    excerpt: "A legal system that demands you know the rules, but never bothers to teach them.",
+    date: "2026-06",
+    category: "philosophy",
+    slug: "who-taught-you-the-law",
+  },
+  {
+    title: "The Closed Loop",
+    excerpt: "Work drains you. Drain makes you sick. Sickness costs money. Money requires work.",
+    date: "2026-06",
+    category: "observation",
+    slug: "closed-loop",
+  },
+  {
+    title: "Don't Build It Too Big",
+    excerpt: "On companies, scale, and why the best business is one that doesn't eat its founder alive.",
+    date: "2026-06",
+    category: "philosophy",
+    slug: "dont-build-too-big",
+  },
+];
+
+const categoryLabels: Record<string, string> = {
+  law: 'Law',
+  life: 'Life',
+  philosophy: 'Philosophy',
+  observation: 'Observation',
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={pageDescription} />
+    <title>{siteTitle}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Upright:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="site-wrapper">
+      <header class="site-header">
+        <div class="container container--wide">
+          <a href="/" class="site-name">{siteTitle}</a>
+          <nav aria-label="Main navigation">
+            <ul class="site-nav">
+              <li><a href="#writing">Writing</a></li>
+              <li><a href="#about">About</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="container container--wide">
+            <p class="hero__tagline">Writer · Systems Observer · Pro Per Litigant</p>
+            <h1 class="hero__title">
+  <span class="word-black">Show me your</span> <span class="word-orange">authority.</span>
+</h1>
+            
+          </div>
+        </section>
+
+        <section class="section" id="writing">
+          <div class="container container--wide">
+            <p class="section__label">Recent Writing</p>
+            <div class="article-grid">
+              {articles.map((article) => (
+                <a href={`/writing/${article.slug}/`} class="article-card">
+                  <div>
+                    <span class={`tag tag--${article.category}`}>
+                      {categoryLabels[article.category]}
+                    </span>
+                    <span class="article-card__title">{article.title}</span>
+                  </div>
+                  <span class="article-card__meta">{article.date}</span>
+                  <p class="article-card__excerpt">{article.excerpt}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section manifesto" id="about">
+          <div class="container container--wide">
+            <p class="section__label">About</p>
+            <p class="manifesto__text">
+              I write about law, institutions, cities, mobility, and the everyday
+              places where public power becomes visible. This is my personal
+              writing archive. Versence Institute remains the home for formal
+              research work.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container container--wide">
+          <p class="site-footer__text">© {new Date().getFullYear()} Ting Luo · All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+
+:root {
+  --ink: #1a1f2e;
+  --paper: #ffffff;         /* 灰蓝色背景 */
+  --accent: #1a2744;        /* 深蓝色 */
+  --accent-orange: #c4622a; /* 深橙色 */
+  --muted: #5a6070;
+  --faint: #c8cdd8;
+  --header-border: #b0b8c8;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.1rem;
+  --text-lg: 1.3rem;
+  --text-xl: 1.6rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+  --text-hero: clamp(2rem, 4.5vw, 3.8rem);
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+
+  --max-width: 720px;
+  --max-width-wide: 1080px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+a {
+  color: var(--ink);
+  text-decoration-color: var(--faint);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--accent-orange);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- Layout ---- */
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.container--wide {
+  max-width: var(--max-width-wide);
+}
+
+/* ---- Header ---- */
+
+.site-header {
+  padding: var(--space-md) 0;
+  border-bottom: none;
+}
+
+.site-header .container {
+  max-width: var(--max-width-wide);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-name {
+  font-family: 'UnifrakturMaguntia', serif;
+  font-size: 2.2rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.site-name:hover {
+  color: var(--accent-orange);
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.site-nav a {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+}
+
+/* ---- Hero ---- */
+
+.hero {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-bottom: none;
+}
+.hero .container {
+  max-width: var(--max-width-wide);
+  text-align: center;
+}
+
+.hero__tagline {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: var(--space-md);
+}
+
+.hero__title {
+  font-family: 'Cormorant Upright', 'Cormorant Garamond', Georgia, serif;
+  font-size: var(--text-hero);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  color: var(--ink);
+  max-width: 22ch;
+  margin: 0 auto;
+}
+
+.hero__title .word-black {
+  color: var(--ink);
+  font-style: normal;
+}
+
+.hero__title .word-orange {
+  color: var(--accent-orange);
+  font-style: normal;
+}
+
+.hero__description {
+  margin-top: var(--space-md);
+  font-size: var(--text-lg);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 48ch;
+}
+
+/* ---- Sections ---- */
+
+.section {
+  padding: var(--space-lg) 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--faint);
+}
+
+.section__label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: var(--space-md);
+}
+
+/* ---- Article Cards ---- */
+
+.article-grid {
+  display: grid;
+  gap: 0;
+}
+
+.article-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--faint);
+  text-decoration: none;
+  transition: padding-left 0.2s;
+}
+
+.article-card:hover {
+  padding-left: var(--space-xs);
+}
+
+.article-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.article-card:hover .article-card__title {
+  color: var(--accent);
+}
+
+.article-card__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.article-card__excerpt {
+  grid-column: 1 / -1;
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  margin-right: var(--space-xs);
+  opacity: 0.7;
+}
+
+.tag--law { color: var(--accent); }
+.tag--life { color: #2a7d5f; }
+.tag--philosophy { color: #5b4fa8; }
+.tag--observation { color: #b8860b; }
+
+/* ---- Manifesto ---- */
+
+.manifesto {
+  padding: var(--space-xl) 0;
+}
+
+.manifesto__text {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 40ch;
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+  margin-top: auto;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--faint);
+}
+
+.site-footer .container {
+  max-width: var(--max-width-wide);
+}
+
+.site-footer__text {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ---- Prose ---- */
+
+.prose {
+  font-size: var(--text-base);
+  line-height: 1.85;
+}
+
+.prose p + p { margin-top: 1.4em; }
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--accent-orange);
+  padding-left: var(--space-md);
+  margin: 2em 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 640px) {
+  :root {
+    --text-hero: 2rem;
+    --space-xl: 4rem;
+    --space-lg: 3rem;
+  }
+
+  .site-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .article-card {
+    grid-template-columns: 1fr;
+  }
+
+  .article-card__meta {
+    order: -1;
+  }
+}
+</style>
