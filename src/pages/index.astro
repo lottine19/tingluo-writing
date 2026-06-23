@@ -207,7 +207,8 @@ font-size: 0.9rem;
 .doc-inner { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 8rem; }
 .doc-back {
   font-family: 'Mandali', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
+  font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: none;
   color: var(--muted);
@@ -307,7 +308,7 @@ font-size: 0.9rem;
 
   <section class="section" id="about" style="padding: var(--space-xl) 0;">
     <div class="container--wide">
-      <p class="section__label" style="text-align: center; font-family: 'Rock Salt', cursive; font-size: 1.5rem; letter-spacing: 0.05em; text-transform: none;">About</p>
+      <p class="section__label" style="text-align: center; font-family: 'Rock Salt', cursive; font-size: 1.5rem; letter-spacing: 0.05em; text-transform: none; color: #e82389;">About</p>
       <p class="about-text">
        I notice things.<br>Then I write them down.
         
@@ -344,7 +345,7 @@ font-size: 0.9rem;
     const color = categoryColors[a.category] || '#5a6070';
     const bodyHTML = a.body.map(p => `<p>${p}</p>`).join('');
     const html = `
-      <button class="doc-back" id="btn-back">← Back</button>
+      <button class="doc-back" id="btn-back">←</button>
       <div class="doc-category" style="color:${color};border-color:${color}">${a.categoryLabel}</div>
       <div class="doc-title">${a.title}</div>
       <div class="doc-meta">By ${a.author} · ${a.date}</div>
