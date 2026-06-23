@@ -12,6 +12,19 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/bad-script": "^5.2.8",
+    "@fontsource/boldonse": "^5.2.4",
+    "@fontsource/bungee-inline": "^5.2.8",
+    "@fontsource/julius-sans-one": "^5.2.7",
+    "@fontsource/kalam": "^5.2.8",
+    "@fontsource/limelight": "^5.2.7",
+    "@fontsource/mandali": "^5.2.8",
+    "@fontsource/marck-script": "^5.2.8",
+    "@fontsource/monoton": "^5.2.7",
+    "@fontsource/pinyon-script": "^5.2.8",
+    "@fontsource/playwrite-nz-guides": "^5.2.7",
+    "@fontsource/poller-one": "^5.2.8",
+    "@fontsource/rock-salt": "^5.2.8",
     "astro": "^7.0.0"
   }
 }

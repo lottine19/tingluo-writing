@@ -1,4 +1,17 @@
 ---
+import '@fontsource/mandali';
+import '@fontsource/bungee-inline';
+import '@fontsource/boldonse';
+import '@fontsource/playwrite-nz-guides';
+import '@fontsource/marck-script';
+import '@fontsource/poller-one';
+import '@fontsource/limelight';
+import '@fontsource/julius-sans-one';
+import '@fontsource/bad-script';
+import '@fontsource/pinyon-script';
+import '@fontsource/monoton';
+import '@fontsource/rock-salt';
+import '@fontsource/kalam/300.css';
 const articleFiles = Object.values(import.meta.glob('../data/writing/*.json', { eager: true }));
 const articles = articleFiles
   .map(f => f.default ?? f)
@@ -55,7 +68,7 @@ a:hover { color: var(--accent-pink); }
   align-items: center;
 }
 .site-name {
-  font-family: 'UnifrakturMaguntia', serif;
+  font-family: 'Pinyon Script', cursive;
   font-size: 2.2rem;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -64,10 +77,9 @@ a:hover { color: var(--accent-pink); }
 }
 .site-nav { display: flex; gap: var(--space-md); list-style: none; }
 .site-nav a {
-  font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-family: 'Marck Script', cursive;
+  font-size: 1.3rem;
   font-weight: 500;
-  text-transform: uppercase;
   letter-spacing: 0.12em;
   text-decoration: none;
   color: var(--muted);
@@ -87,7 +99,7 @@ a:hover { color: var(--accent-pink); }
   align-items: center;
 }
 .hero__title {
-  font-family: 'Viaoda Libre', 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Monoton', cursive;
   font-size: clamp(2.6rem, 5.8vw, 5rem);
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -100,9 +112,9 @@ a:hover { color: var(--accent-pink); }
 .section { padding: var(--space-lg) 0; border-top: 1px solid var(--faint); }
 .container--wide { max-width: var(--max-width-wide); margin: 0 auto; padding: 0 var(--space-md); }
 .section__label {
-  font-family: var(--font-ui);
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-family: 'Playwrite NZ Guides', cursive;
+  font-size: 1.1rem;
+  text-transform: none;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--muted);
@@ -123,20 +135,20 @@ a:hover { color: var(--accent-pink); }
 .article-card:hover { padding-left: var(--space-xs); }
 .article-card__left { display: flex; align-items: baseline; gap: var(--space-xs); flex-wrap: wrap; }
 .article-card__title {
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-family: 'Bungee Inline', cursive;
+  font-size: 0.90rem;
   font-weight: 400;
   color: var(--ink);
   letter-spacing: 0.02em;
 }
 .article-card:hover .article-card__title { color: var(--accent); }
 .article-card__meta {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-  white-space: nowrap;
+  font-family: 'Kalam', cursive;
+font-weight: 300;
+font-size: 0.9rem;
 }
 .article-card__excerpt {
+  font-family: 'Julius Sans One', sans-serif;
   grid-column: 1 / -1;
   font-size: 0.875rem;
   font-style: italic;
@@ -162,7 +174,7 @@ a:hover { color: var(--accent-pink); }
 .tag--governance { color: #2f80b8; }
 
 .about-text {
-  font-family: var(--font-display);
+  font-family: 'Kalam', cursive;
   font-size: 1.05rem;
   font-weight: 300;
   line-height: 1.85;
@@ -175,8 +187,8 @@ a:hover { color: var(--accent-pink); }
 .site-footer { padding: var(--space-md) 0; border-top: 1px solid var(--faint); }
 .site-footer .container { max-width: var(--max-width-wide); margin: 0 auto; padding: 0 var(--space-md); }
 .site-footer__text {
-  font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 0.85rem;
   color: var(--muted);
   letter-spacing: 0.04em;
 }
@@ -196,14 +208,13 @@ a:hover { color: var(--accent-pink); }
 }
 .doc-inner { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 8rem; }
 .doc-back {
-  font-family: var(--font-ui);
-  font-size: 0.65rem;
+  font-family: 'Mandali', sans-serif;
+  font-size: 0.95rem;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--muted);
   background: none;
-  border: 1px solid var(--faint);
-  border-radius: 2px;
+  border: none;
   cursor: pointer;
   margin-bottom: 3rem;
   margin-right: 0.75rem;
@@ -225,7 +236,7 @@ a:hover { color: var(--accent-pink); }
   margin-bottom: 1.25rem;
 }
 .doc-title {
-  font-family: 'Inter', system-ui, sans-serif;
+ font-family: 'Bungee Inline', cursive;
   font-size: clamp(1.6rem, 3.5vw, 2.4rem);
   font-weight: 400;
   line-height: 1.25;
@@ -233,8 +244,8 @@ a:hover { color: var(--accent-pink); }
   margin-bottom: 2rem;
 }
 .doc-meta {
-  font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-family: 'Kalam', cursive;
+  font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted);
@@ -242,7 +253,7 @@ a:hover { color: var(--accent-pink); }
 }
 .doc-divider { width: 100%; height: 1px; background: var(--faint); margin: 2rem 0; }
 .doc-body-text {
-  font-family: var(--font-display);
+  font-family: 'Mandali', sans-serif;
   font-size: 1.15rem;
   line-height: 1.85;
   color: var(--ink);
@@ -298,9 +309,9 @@ a:hover { color: var(--accent-pink); }
 
   <section class="section" id="about" style="padding: var(--space-xl) 0;">
     <div class="container--wide">
-      <p class="section__label" style="text-align: center;">About</p>
+      <p class="section__label" style="text-align: center; font-family: 'Rock Salt', cursive; font-size: 1.5rem; letter-spacing: 0.05em; text-transform: none;">About</p>
       <p class="about-text">
-        I write about everything that becomes visible when life touches a system: law, institutions, cities, mobility, money, health, language, weather, power, and the strange little errors that reveal how the world is built.
+       I notice things.<br>Then I write them down.
         
       </p>
     </div>
