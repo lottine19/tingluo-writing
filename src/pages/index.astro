@@ -131,7 +131,7 @@ a:hover { color: var(--accent-pink); }
   transition: padding-left 0.2s;
 }
 .article-card:hover { padding-left: var(--space-xs); }
-.article-card__left { display: flex; align-items: baseline; gap: var(--space-xs); flex-wrap: wrap; }
+.article-card__left { display: flex; align-items: baseline; gap: var(--space-xs); }
 .article-card__title {
   font-family: 'Bungee Inline', cursive;
   font-size: 0.90rem;
@@ -165,7 +165,7 @@ font-size: 0.9rem;
   border-radius: 2px;
   white-space: nowrap;
 }
-.tag--law { color: var(--accent); }
+.tag--law { color: #540b0b; }
 .tag--life { color: #2a7d5f; }
 .tag--philosophy { color: #5b4fa8; }
 .tag--observation { color: #b8860b; }
@@ -334,7 +334,7 @@ font-size: 0.9rem;
 
   const categoryColors = {
     governance: '#2f80b8',
-    law: '#1a2744',
+    law: '#540b0b',
     life: '#2a7d5f',
     philosophy: '#5b4fa8',
     observation: '#b8860b',
@@ -345,7 +345,10 @@ font-size: 0.9rem;
     const a = ARTICLES[slug];
     if (!a) return;
     const color = categoryColors[a.category] || '#5a6070';
-    const bodyHTML = a.body.map(p => `<p>${p}</p>`).join('');
+    const bodyHTML = a.body.map(p => {
+      const rendered = p.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      return `<p>${rendered}</p>`;
+    }).join('');
     const html = `
       <button class="doc-back" id="btn-back">←</button>
       <div class="doc-category" style="color:${color};border-color:${color}">${a.categoryLabel}</div>
